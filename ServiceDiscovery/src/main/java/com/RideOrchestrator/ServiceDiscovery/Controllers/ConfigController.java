@@ -33,5 +33,10 @@ public class ConfigController {
         }
 
         return ResponseEntity.ok(service);
-    } 
+    }
+
+    @GetMapping(value = "users")
+    public String users() {
+        return "users";
+    }
 }
