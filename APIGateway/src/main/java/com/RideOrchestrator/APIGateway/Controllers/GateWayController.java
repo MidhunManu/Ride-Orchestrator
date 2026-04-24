@@ -19,6 +19,6 @@ public class GateWayController {
 
     @RequestMapping("/**")
     public ResponseEntity<String> handle (HttpServletRequest request) throws Exception {
-        return gateWayService._forward(request);
+        return gateWayService.forward(request);
     }
 }
