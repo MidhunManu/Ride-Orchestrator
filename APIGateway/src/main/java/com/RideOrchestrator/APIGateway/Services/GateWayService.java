@@ -22,22 +22,6 @@ public class GateWayService {
         String path = request.getRequestURI();
         String method = request.getMethod();
         String body = request.getReader().lines().reduce("", (a, b) -> a + b);
-
-        String serviceURL = "http://localhost:8080";
-
-        String response = networkClient.call(method,
-                serviceURL + path,
-                path,
-                null,
-                body);
-
-        return ResponseEntity.ok(response);
-    }
-
-    public ResponseEntity<String> _forward(HttpServletRequest request) throws Exception {
-        String path = request.getRequestURI();
-        String method = request.getMethod();
-        String body = request.getReader().lines().reduce("", (a, b) -> a + b);
         String serviceDiscoveryPathURL = discoveryBaseURL + "/service-lookup" + path;
         System.out.println("sout " + serviceDiscoveryPathURL);
 
