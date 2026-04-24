@@ -3,3 +3,6 @@ spring:
     import: "services-mapping.yml"
   application:
     name: ServiceDiscovery
+
+server:
+  port: 8080
