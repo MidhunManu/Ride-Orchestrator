@@ -2,7 +2,7 @@ discovery:
   services:
     - name: user-service
       host: 127.0.0.1
-      port: 8001
+      port: 8082
     - name: ride-service
       host: 127.0.0.1
       port: 8002

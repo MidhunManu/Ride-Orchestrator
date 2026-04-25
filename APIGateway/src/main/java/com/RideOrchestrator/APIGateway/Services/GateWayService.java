@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.RideOrchestrator.APIGateway.NetworkClient;
 
 import jakarta.servlet.http.HttpServletRequest;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 @Service
 public class GateWayService {
@@ -22,11 +24,35 @@ public class GateWayService {
         String path = request.getRequestURI();
         String method = request.getMethod();
         String body = request.getReader().lines().reduce("", (a, b) -> a + b);
-        String serviceDiscoveryPathURL = discoveryBaseURL + "/service-lookup" + path;
-        System.out.println("sout " + serviceDiscoveryPathURL);
+        String microService = this.mapPathToMicroService(path);
 
-        String response = networkClient.call(method, serviceDiscoveryPathURL, serviceDiscoveryPathURL, null, body);
+        String serviceDiscoveryPathURL = discoveryBaseURL + "/service-lookup/" + microService;
 
-        return ResponseEntity.ok(response);
+        String response = networkClient.call("POST", serviceDiscoveryPathURL, serviceDiscoveryPathURL, null, body);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode node = objectMapper.readTree(response);
+
+        System.out.println("sout: " + response);
+        String host = node.get("host").asString();
+        String port = node.get("port").asString();
+
+        String url = "http://" + host + ":" + port + path;
+
+        String serviceResponse = networkClient.call(method, url, serviceDiscoveryPathURL, null, body);
+
+        return ResponseEntity.ok()
+                .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+                .body(serviceResponse);
+    }
+
+    private String mapPathToMicroService(String path) {
+        if (path.startsWith("/user")) {
+            return "user-service";
+        } else if (path.startsWith("/ride")) {
+            return "ride-service";
+        }
+
+        throw new IllegalArgumentException("Unkown service for path, "+ path);
     }
 }

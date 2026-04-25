@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: UserMicroService
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3307/users
+    username: root
+    password: root
+
+server:
+  port: 8082
