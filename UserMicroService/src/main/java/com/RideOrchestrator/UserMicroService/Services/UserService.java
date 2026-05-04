@@ -20,6 +20,9 @@ public class UserService {
     }
 
     public ResponseEntity<User> storeUser(User user) {
+        if (user == null) {
+            throw new IllegalArgumentException("User must not be null");
+        }
         return ResponseEntity.ok(this.userRepository.save(user));
     }
 

@@ -32,7 +32,13 @@ public class UserController {
     }
 
     @PostMapping(value = "user")
-    public ResponseEntity<User> store(@RequestBody User user) {
-        return this.userService.storeUser(user);
+    public ResponseEntity<?> store(@RequestBody User user) {
+        try {
+            return this.userService.storeUser(user);
+        } catch(IllegalArgumentException err) {
+            return ResponseEntity
+                .badRequest()
+                .body("user must not be null");
+        }
     }
 }
