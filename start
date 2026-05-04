@@ -14,6 +14,10 @@ echo "Starting User MicroService..."
 java -jar UserMicroService/target/UserMicroService-0.0.1-SNAPSHOT.jar  > logs/UserMicroService.log 2>&1 &
 UserMicroService=$!
 
+echo "Starting Auth MicroService..."
+java -jar AuthMicroService/target/AuthMicroService-0.0.1-SNAPSHOT.jar   > logs/AuthMicroService.log 2>&1 &
+AuthMicroService=$!
+
 echo "All services started."
 
 trap "kill 0; exit" INT

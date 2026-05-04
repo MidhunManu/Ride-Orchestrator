@@ -6,3 +6,6 @@ discovery:
     - name: ride-service
       host: 127.0.0.1
       port: 8002
+    - name: auth-service
+      host: 127.0.0.1
+      port: 8083
