@@ -20,10 +20,14 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(name = "phone_number", length = 20)
+    @Column(name = "phone_number", length = 20, unique = true, nullable = false)
     private String phoneNumber;
     
     public User(Integer id, String username, String email, String phoneNumber) {
