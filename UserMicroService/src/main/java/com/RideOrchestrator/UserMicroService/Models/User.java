@@ -1,5 +1,7 @@
 package com.RideOrchestrator.UserMicroService.Models;
 
+import com.RideOrchestrator.UserMicroService.Enums.RoleEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,23 +22,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Column(nullable = false)
     private String username;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(name = "phone_number", length = 20)
+    @Column(name = "phone_number", length = 20, unique = true, nullable = false)
     private String phoneNumber;
+
+    @Column(nullable = false)
+    private RoleEnum role;
     
-    public User(Integer id, String username, String email, String phoneNumber) {
+    public User(Integer id, String username, String email, String phoneNumber, RoleEnum role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
-    public User(String username, String email, String phoneNumber) {
+    public User(String username, String email, String phoneNumber, RoleEnum role) {
         this.username = username;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.role = role;
     }
 
     public User() {
@@ -67,9 +78,17 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEnum role) {
+        this.role = role;
+    }
     
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
+        return "User [id=" + id + ", username=" + username + ", email=" + email + ", phoneNumber=" + phoneNumber + ", role =" + role + "]";
     }
 }
