@@ -32,7 +32,7 @@ public class User {
     @Column(name = "phone_number", length = 20, unique = true, nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TINY  INT DEFAULT 0")
     private RoleEnum role;
     
     public User(Integer id, String username, String email, String phoneNumber, RoleEnum role) {
