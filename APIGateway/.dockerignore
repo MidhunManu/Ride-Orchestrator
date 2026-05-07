@@ -1,0 +1,45 @@
+# Build output
+target/
+build/
+
+# Maven / Gradle files (optional depending on strategy)
+.mvn/
+mvnw
+mvnw.cmd
+.gradle/
+gradle/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# Git metadata
+.git/
+.gitignore
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker-related (avoid nesting issues)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Test output (optional - include if you don't want tests inside image context)
+**/test/
+**/tests/
+
+# Local environment configs
+.env
+*.env

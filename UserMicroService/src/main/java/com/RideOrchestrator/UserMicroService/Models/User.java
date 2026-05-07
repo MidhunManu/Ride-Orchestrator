@@ -4,6 +4,8 @@ import com.RideOrchestrator.UserMicroService.Enums.RoleEnum;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,6 +14,7 @@ import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(
+    name = "users",
     uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email"),
@@ -32,7 +35,9 @@ public class User {
     @Column(name = "phone_number", length = 20, unique = true, nullable = false)
     private String phoneNumber;
 
-    @Column(nullable = false, columnDefinition = "TINY  INT DEFAULT 0")
+    @Enumerated(EnumType.STRING)
+    @Column(nullable =  false)
+
     private RoleEnum role;
     
     public User(Integer id, String username, String email, String phoneNumber, RoleEnum role) {

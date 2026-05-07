@@ -1,8 +1,8 @@
 spring:
+  application:
+    name: SERVICE-DISCOVERY
   config:
     import: "services-mapping.yml"
-  application:
-    name: ServiceDiscovery
 
 server:
   port: 8761
